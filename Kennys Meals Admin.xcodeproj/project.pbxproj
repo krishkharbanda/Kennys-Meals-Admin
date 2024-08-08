@@ -7,13 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		711945F92C5691AE003E9C2D /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711945F82C5691AE003E9C2D /* DataScannerView.swift */; };
+		711945FB2C569216003E9C2D /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711945FA2C569216003E9C2D /* ScanViewModel.swift */; };
+		711945FD2C5692BF003E9C2D /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711945FC2C5692BF003E9C2D /* ScanView.swift */; };
+		71267BF02C308957001FE59F /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BEF2C308957001FE59F /* SideMenu.swift */; };
+		71267BF22C308A73001FE59F /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BF12C308A73001FE59F /* SideMenuView.swift */; };
+		71267BF42C308ADF001FE59F /* SideMenuRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BF32C308ADF001FE59F /* SideMenuRowType.swift */; };
+		713DCE852C5DA036007F934F /* MenuDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DCE842C5DA036007F934F /* MenuDetailView.swift */; };
+		714CCD2F2C420080002BC9A4 /* Image++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CCD2E2C420080002BC9A4 /* Image++Extension.swift */; };
+		7170987A2C2B13A200394F9D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717098792C2B13A200394F9D /* ResetPasswordView.swift */; };
+		7170987C2C2B2CD400394F9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7170987B2C2B2CD400394F9D /* LaunchScreen.storyboard */; };
+		7170987E2C2B336200394F9D /* View++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170987D2C2B336200394F9D /* View++Extension.swift */; };
+		717098832C2B3C3E00394F9D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 717098822C2B3C3E00394F9D /* FirebaseAnalytics */; };
+		717098852C2B3C3E00394F9D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 717098842C2B3C3E00394F9D /* FirebaseAnalyticsOnDeviceConversion */; };
+		717098872C2B3C3E00394F9D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 717098862C2B3C3E00394F9D /* FirebaseAnalyticsSwift */; };
+		717098892C2B3C3E00394F9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 717098882C2B3C3E00394F9D /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		7170988B2C2B3C3E00394F9D /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 7170988A2C2B3C3E00394F9D /* FirebaseAppCheck */; };
+		717A32172C51C1B20072AC58 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32112C51C1B10072AC58 /* MealCellView.swift */; };
+		717A32182C51C1B20072AC58 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32122C51C1B10072AC58 /* MealsView.swift */; };
+		717A32192C51C1B20072AC58 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32132C51C1B10072AC58 /* MealCell.swift */; };
+		717A321A2C51C1B20072AC58 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32142C51C1B20072AC58 /* Meal.swift */; };
+		717A321B2C51C1B20072AC58 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32152C51C1B20072AC58 /* MealDetailView.swift */; };
+		717A321C2C51C1B20072AC58 /* MealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A32162C51C1B20072AC58 /* MealsViewModel.swift */; };
 		71878D212C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D202C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift */; };
-		71878D232C1FBB0900FB4A85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D222C1FBB0900FB4A85 /* ContentView.swift */; };
 		71878D252C1FBB0B00FB4A85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71878D242C1FBB0B00FB4A85 /* Assets.xcassets */; };
 		71878D282C1FBB0B00FB4A85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71878D272C1FBB0B00FB4A85 /* Preview Assets.xcassets */; };
 		71878D322C1FBB0C00FB4A85 /* Kennys_Meals_AdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D312C1FBB0C00FB4A85 /* Kennys_Meals_AdminTests.swift */; };
 		71878D3C2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D3B2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift */; };
 		71878D3E2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D3D2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift */; };
+		71B5730F2C52855F006391A0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5730E2C52855F006391A0 /* MenuView.swift */; };
+		71B573112C528734006391A0 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B573102C528734006391A0 /* MenuViewModel.swift */; };
+		71B573132C5287AB006391A0 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B573122C5287AB006391A0 /* MenuCell.swift */; };
+		71B573152C528DE4006391A0 /* MenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B573142C528DE4006391A0 /* MenuCellView.swift */; };
+		71C796BC2C2C9E5C00B9624C /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C796BB2C2C9E5C00B9624C /* AuthError.swift */; };
+		71C796BE2C2C9FF900B9624C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C796BD2C2C9FF900B9624C /* User.swift */; };
+		71C796C02C2CA85F00B9624C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C796BF2C2CA85F00B9624C /* HomeView.swift */; };
+		71C796C32C2F559300B9624C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 71C796C22C2F559300B9624C /* GoogleSignIn */; };
+		71C796C52C2F559300B9624C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C796C42C2F559300B9624C /* GoogleSignInSwift */; };
+		71C9AB082C27607A00400D0B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C9AB072C27607A00400D0B /* LoginView.swift */; };
+		71C9AB0A2C27609600400D0B /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C9AB092C27609600400D0B /* Habitat.swift */; };
+		71C9AB0C2C2761F800400D0B /* HabitatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C9AB0B2C2761F800400D0B /* HabitatView.swift */; };
+		71C9AB0E2C27628000400D0B /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C9AB0D2C27628000400D0B /* AppScene.swift */; };
+		71F14C902C4244E800D4F99E /* Double++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F14C8F2C4244E800D4F99E /* Double++Extension.swift */; };
+		71F14C942C4726C000D4F99E /* UIImage++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F14C932C4726C000D4F99E /* UIImage++Extension.swift */; };
+		71F14C962C4858E600D4F99E /* Int++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F14C952C4858E600D4F99E /* Int++Extension.swift */; };
+		71F6930C2C2C9B4C00A476A3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F6930B2C2C9B4C00A476A3 /* LoginViewModel.swift */; };
+		71F6930E2C2C9C8700A476A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F6930D2C2C9C8700A476A3 /* GoogleService-Info.plist */; };
+		71F693102C2C9D0B00A476A3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71F6930F2C2C9D0B00A476A3 /* FirebaseAuth */; };
+		71F693122C2C9D0B00A476A3 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71F693112C2C9D0B00A476A3 /* FirebaseAuthCombine-Community */; };
+		71F693142C2C9D0B00A476A3 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 71F693132C2C9D0B00A476A3 /* FirebaseDynamicLinks */; };
+		71F693162C2C9D0B00A476A3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 71F693152C2C9D0B00A476A3 /* FirebaseFirestore */; };
+		71F693182C2C9D0B00A476A3 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71F693172C2C9D0B00A476A3 /* FirebaseFirestoreCombine-Community */; };
+		71F6931A2C2C9D0B00A476A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71F693192C2C9D0B00A476A3 /* FirebaseFirestoreSwift */; };
+		71F6931C2C2C9D0B00A476A3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 71F6931B2C2C9D0B00A476A3 /* FirebaseStorage */; };
+		71F6931E2C2C9D0B00A476A3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71F6931D2C2C9D0B00A476A3 /* FirebaseStorageCombine-Community */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +81,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		711945F82C5691AE003E9C2D /* DataScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
+		711945FA2C569216003E9C2D /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		711945FC2C5692BF003E9C2D /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		71267BEF2C308957001FE59F /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		71267BF12C308A73001FE59F /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		71267BF32C308ADF001FE59F /* SideMenuRowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuRowType.swift; sourceTree = "<group>"; };
+		713DCE842C5DA036007F934F /* MenuDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailView.swift; sourceTree = "<group>"; };
+		714CCD2E2C420080002BC9A4 /* Image++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image++Extension.swift"; sourceTree = "<group>"; };
+		717098792C2B13A200394F9D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		7170987B2C2B2CD400394F9D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7170987D2C2B336200394F9D /* View++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View++Extension.swift"; sourceTree = "<group>"; };
+		717A32112C51C1B10072AC58 /* MealCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
+		717A32122C51C1B10072AC58 /* MealsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
+		717A32132C51C1B10072AC58 /* MealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
+		717A32142C51C1B20072AC58 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		717A32152C51C1B20072AC58 /* MealDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
+		717A32162C51C1B20072AC58 /* MealsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewModel.swift; sourceTree = "<group>"; };
 		71878D1D2C1FBB0900FB4A85 /* Kennys Meals Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kennys Meals Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71878D202C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kennys_Meals_AdminApp.swift; sourceTree = "<group>"; };
-		71878D222C1FBB0900FB4A85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		71878D242C1FBB0B00FB4A85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71878D272C1FBB0B00FB4A85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71878D2D2C1FBB0B00FB4A85 /* Kennys Meals AdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kennys Meals AdminTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +107,23 @@
 		71878D372C1FBB0C00FB4A85 /* Kennys Meals AdminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kennys Meals AdminUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71878D3B2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kennys_Meals_AdminUITests.swift; sourceTree = "<group>"; };
 		71878D3D2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kennys_Meals_AdminUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		71B5730E2C52855F006391A0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		71B573102C528734006391A0 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		71B573122C5287AB006391A0 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		71B573142C528DE4006391A0 /* MenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCellView.swift; sourceTree = "<group>"; };
+		71C796BB2C2C9E5C00B9624C /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		71C796BD2C2C9FF900B9624C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		71C796BF2C2CA85F00B9624C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		71C796C62C2F5FA700B9624C /* Kennys-Meals-Admin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kennys-Meals-Admin-Info.plist"; sourceTree = SOURCE_ROOT; };
+		71C9AB072C27607A00400D0B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		71C9AB092C27609600400D0B /* Habitat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habitat.swift; sourceTree = "<group>"; };
+		71C9AB0B2C2761F800400D0B /* HabitatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatView.swift; sourceTree = "<group>"; };
+		71C9AB0D2C27628000400D0B /* AppScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
+		71F14C8F2C4244E800D4F99E /* Double++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double++Extension.swift"; sourceTree = "<group>"; };
+		71F14C932C4726C000D4F99E /* UIImage++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage++Extension.swift"; sourceTree = "<group>"; };
+		71F14C952C4858E600D4F99E /* Int++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++Extension.swift"; sourceTree = "<group>"; };
+		71F6930B2C2C9B4C00A476A3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		71F6930D2C2C9C8700A476A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +131,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C796C52C2F559300B9624C /* GoogleSignInSwift in Frameworks */,
+				717098872C2B3C3E00394F9D /* FirebaseAnalyticsSwift in Frameworks */,
+				71F693102C2C9D0B00A476A3 /* FirebaseAuth in Frameworks */,
+				717098832C2B3C3E00394F9D /* FirebaseAnalytics in Frameworks */,
+				71F6931E2C2C9D0B00A476A3 /* FirebaseStorageCombine-Community in Frameworks */,
+				71F693182C2C9D0B00A476A3 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				71F693142C2C9D0B00A476A3 /* FirebaseDynamicLinks in Frameworks */,
+				71F6931C2C2C9D0B00A476A3 /* FirebaseStorage in Frameworks */,
+				71F6931A2C2C9D0B00A476A3 /* FirebaseFirestoreSwift in Frameworks */,
+				717098852C2B3C3E00394F9D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				71F693162C2C9D0B00A476A3 /* FirebaseFirestore in Frameworks */,
+				7170988B2C2B3C3E00394F9D /* FirebaseAppCheck in Frameworks */,
+				71F693122C2C9D0B00A476A3 /* FirebaseAuthCombine-Community in Frameworks */,
+				717098892C2B3C3E00394F9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				71C796C32C2F559300B9624C /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +166,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		71267BF52C309AF7001FE59F /* LoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				71C9AB072C27607A00400D0B /* LoginView.swift */,
+				71F6930B2C2C9B4C00A476A3 /* LoginViewModel.swift */,
+				71C796BB2C2C9E5C00B9624C /* AuthError.swift */,
+				717098792C2B13A200394F9D /* ResetPasswordView.swift */,
+			);
+			path = LoginViews;
+			sourceTree = "<group>";
+		};
+		71267BF62C309B1B001FE59F /* Habitat */ = {
+			isa = PBXGroup;
+			children = (
+				71C796BD2C2C9FF900B9624C /* User.swift */,
+				71C9AB092C27609600400D0B /* Habitat.swift */,
+				71C9AB0B2C2761F800400D0B /* HabitatView.swift */,
+			);
+			path = Habitat;
+			sourceTree = "<group>";
+		};
+		71267BF72C309B31001FE59F /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				71267BEF2C308957001FE59F /* SideMenu.swift */,
+				71267BF12C308A73001FE59F /* SideMenuView.swift */,
+				71267BF32C308ADF001FE59F /* SideMenuRowType.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		71878D142C1FBB0900FB4A85 = {
 			isa = PBXGroup;
 			children = (
@@ -94,9 +220,27 @@
 		71878D1F2C1FBB0900FB4A85 /* Kennys Meals Admin */ = {
 			isa = PBXGroup;
 			children = (
+				71C796C62C2F5FA700B9624C /* Kennys-Meals-Admin-Info.plist */,
 				71878D202C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift */,
-				71878D222C1FBB0900FB4A85 /* ContentView.swift */,
+				71C9AB0D2C27628000400D0B /* AppScene.swift */,
+				71267BF62C309B1B001FE59F /* Habitat */,
+				71267BF52C309AF7001FE59F /* LoginViews */,
+				71267BF72C309B31001FE59F /* SideMenu */,
+				71C796BF2C2CA85F00B9624C /* HomeView.swift */,
+				71B5730D2C52853A006391A0 /* MealsView */,
+				71B5730E2C52855F006391A0 /* MenuView.swift */,
+				71B573102C528734006391A0 /* MenuViewModel.swift */,
+				71B573122C5287AB006391A0 /* MenuCell.swift */,
+				71B573142C528DE4006391A0 /* MenuCellView.swift */,
+				713DCE842C5DA036007F934F /* MenuDetailView.swift */,
 				71878D242C1FBB0B00FB4A85 /* Assets.xcassets */,
+				7170987B2C2B2CD400394F9D /* LaunchScreen.storyboard */,
+				71F14C932C4726C000D4F99E /* UIImage++Extension.swift */,
+				71F14C952C4858E600D4F99E /* Int++Extension.swift */,
+				7170987D2C2B336200394F9D /* View++Extension.swift */,
+				714CCD2E2C420080002BC9A4 /* Image++Extension.swift */,
+				71F14C8F2C4244E800D4F99E /* Double++Extension.swift */,
+				71F6930D2C2C9C8700A476A3 /* GoogleService-Info.plist */,
 				71878D262C1FBB0B00FB4A85 /* Preview Content */,
 			);
 			path = "Kennys Meals Admin";
@@ -127,6 +271,22 @@
 			path = "Kennys Meals AdminUITests";
 			sourceTree = "<group>";
 		};
+		71B5730D2C52853A006391A0 /* MealsView */ = {
+			isa = PBXGroup;
+			children = (
+				711945F82C5691AE003E9C2D /* DataScannerView.swift */,
+				717A32142C51C1B20072AC58 /* Meal.swift */,
+				717A32132C51C1B10072AC58 /* MealCell.swift */,
+				717A32112C51C1B10072AC58 /* MealCellView.swift */,
+				717A32152C51C1B20072AC58 /* MealDetailView.swift */,
+				717A32122C51C1B10072AC58 /* MealsView.swift */,
+				717A32162C51C1B20072AC58 /* MealsViewModel.swift */,
+				711945FA2C569216003E9C2D /* ScanViewModel.swift */,
+				711945FC2C5692BF003E9C2D /* ScanView.swift */,
+			);
+			path = MealsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +303,23 @@
 			dependencies = (
 			);
 			name = "Kennys Meals Admin";
+			packageProductDependencies = (
+				717098822C2B3C3E00394F9D /* FirebaseAnalytics */,
+				717098842C2B3C3E00394F9D /* FirebaseAnalyticsOnDeviceConversion */,
+				717098862C2B3C3E00394F9D /* FirebaseAnalyticsSwift */,
+				717098882C2B3C3E00394F9D /* FirebaseAnalyticsWithoutAdIdSupport */,
+				7170988A2C2B3C3E00394F9D /* FirebaseAppCheck */,
+				71F6930F2C2C9D0B00A476A3 /* FirebaseAuth */,
+				71F693112C2C9D0B00A476A3 /* FirebaseAuthCombine-Community */,
+				71F693132C2C9D0B00A476A3 /* FirebaseDynamicLinks */,
+				71F693152C2C9D0B00A476A3 /* FirebaseFirestore */,
+				71F693172C2C9D0B00A476A3 /* FirebaseFirestoreCombine-Community */,
+				71F693192C2C9D0B00A476A3 /* FirebaseFirestoreSwift */,
+				71F6931B2C2C9D0B00A476A3 /* FirebaseStorage */,
+				71F6931D2C2C9D0B00A476A3 /* FirebaseStorageCombine-Community */,
+				71C796C22C2F559300B9624C /* GoogleSignIn */,
+				71C796C42C2F559300B9624C /* GoogleSignInSwift */,
+			);
 			productName = "Kennys Meals Admin";
 			productReference = 71878D1D2C1FBB0900FB4A85 /* Kennys Meals Admin.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +392,10 @@
 				Base,
 			);
 			mainGroup = 71878D142C1FBB0900FB4A85;
+			packageReferences = (
+				717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				71C796C12C2F559300B9624C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = 71878D1E2C1FBB0900FB4A85 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,6 +413,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				71878D282C1FBB0B00FB4A85 /* Preview Assets.xcassets in Resources */,
+				71F6930E2C2C9C8700A476A3 /* GoogleService-Info.plist in Resources */,
+				7170987C2C2B2CD400394F9D /* LaunchScreen.storyboard in Resources */,
 				71878D252C1FBB0B00FB4A85 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +440,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71878D232C1FBB0900FB4A85 /* ContentView.swift in Sources */,
+				71267BF42C308ADF001FE59F /* SideMenuRowType.swift in Sources */,
+				711945F92C5691AE003E9C2D /* DataScannerView.swift in Sources */,
+				714CCD2F2C420080002BC9A4 /* Image++Extension.swift in Sources */,
+				71B573132C5287AB006391A0 /* MenuCell.swift in Sources */,
+				71C9AB0E2C27628000400D0B /* AppScene.swift in Sources */,
+				717A32192C51C1B20072AC58 /* MealCell.swift in Sources */,
+				711945FD2C5692BF003E9C2D /* ScanView.swift in Sources */,
+				717A321A2C51C1B20072AC58 /* Meal.swift in Sources */,
+				717A321C2C51C1B20072AC58 /* MealsViewModel.swift in Sources */,
+				71C9AB0C2C2761F800400D0B /* HabitatView.swift in Sources */,
+				71C9AB082C27607A00400D0B /* LoginView.swift in Sources */,
+				71267BF02C308957001FE59F /* SideMenu.swift in Sources */,
+				717A321B2C51C1B20072AC58 /* MealDetailView.swift in Sources */,
+				71B5730F2C52855F006391A0 /* MenuView.swift in Sources */,
+				711945FB2C569216003E9C2D /* ScanViewModel.swift in Sources */,
+				7170987A2C2B13A200394F9D /* ResetPasswordView.swift in Sources */,
+				717A32182C51C1B20072AC58 /* MealsView.swift in Sources */,
+				71B573112C528734006391A0 /* MenuViewModel.swift in Sources */,
+				713DCE852C5DA036007F934F /* MenuDetailView.swift in Sources */,
+				71C796BC2C2C9E5C00B9624C /* AuthError.swift in Sources */,
+				71C9AB0A2C27609600400D0B /* Habitat.swift in Sources */,
+				71267BF22C308A73001FE59F /* SideMenuView.swift in Sources */,
+				7170987E2C2B336200394F9D /* View++Extension.swift in Sources */,
 				71878D212C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift in Sources */,
+				71F14C942C4726C000D4F99E /* UIImage++Extension.swift in Sources */,
+				71C796C02C2CA85F00B9624C /* HomeView.swift in Sources */,
+				71F6930C2C2C9B4C00A476A3 /* LoginViewModel.swift in Sources */,
+				71F14C962C4858E600D4F99E /* Int++Extension.swift in Sources */,
+				717A32172C51C1B20072AC58 /* MealCellView.swift in Sources */,
+				71B573152C528DE4006391A0 /* MenuCellView.swift in Sources */,
+				71C796BE2C2C9FF900B9624C /* User.swift in Sources */,
+				71F14C902C4244E800D4F99E /* Double++Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,13 +635,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kennys Meals Admin/Preview Content\"";
+				DEVELOPMENT_TEAM = SV7TAGBDW5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Kennys-Meals-Admin-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KM Admin";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,13 +668,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kennys Meals Admin/Preview Content\"";
+				DEVELOPMENT_TEAM = SV7TAGBDW5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Kennys-Meals-Admin-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KM Admin";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -582,6 +805,95 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.28.1;
+			};
+		};
+		71C796C12C2F559300B9624C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		717098822C2B3C3E00394F9D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		717098842C2B3C3E00394F9D /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		717098862C2B3C3E00394F9D /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		717098882C2B3C3E00394F9D /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		7170988A2C2B3C3E00394F9D /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717098812C2B3C3E00394F9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		71C796C22C2F559300B9624C /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C796C12C2F559300B9624C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		71C796C42C2F559300B9624C /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C796C12C2F559300B9624C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		71F6930F2C2C9D0B00A476A3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuth;
+		};
+		71F693112C2C9D0B00A476A3 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		71F693132C2C9D0B00A476A3 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseDynamicLinks;
+		};
+		71F693152C2C9D0B00A476A3 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
+		71F693172C2C9D0B00A476A3 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		71F693192C2C9D0B00A476A3 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestoreSwift;
+		};
+		71F6931B2C2C9D0B00A476A3 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseStorage;
+		};
+		71F6931D2C2C9D0B00A476A3 /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 71878D152C1FBB0900FB4A85 /* Project object */;
 }
