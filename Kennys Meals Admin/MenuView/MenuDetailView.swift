@@ -86,7 +86,7 @@ struct MenuDetailView: View {
         })
         .onChange(of: viewModel.isAddingMeals, { oldValue, newValue in
             if !newValue {
-                menuCell.mealCells = viewModel.selectedMenu.mealCells
+                menuCell.mealCells = viewModel.selectedMenuCell.mealCells
             }
         })
         .alert("Change \(selectedMeal?.docId ?? "")", isPresented: $isEditingCount) {
@@ -291,7 +291,7 @@ struct AddMealsView: View {
                         Text("Done")
                     }
                     Button {
-                        menuViewModel.selectedMenu.mealCells = tempMealCells
+                        menuViewModel.selectedMenuCell.mealCells = tempMealCells
                         menuViewModel.isAddingMeals = false
                     } label: {
                         Text("Cancel")
@@ -402,9 +402,9 @@ struct AddMealsView: View {
                     HStack {
                         Button {
                             if mealsViewModel.selectedMealCells.contains(where: { $0.docId == mealsViewModel.mealCells[i].docId }) {
-                                menuViewModel.selectedMenu.mealCells.removeValue(forKey: mealsViewModel.mealCells[i])
+                                menuViewModel.selectedMenuCell.mealCells.removeValue(forKey: mealsViewModel.mealCells[i])
                             } else {
-                                menuViewModel.selectedMenu.mealCells[mealsViewModel.mealCells[i]] = 10
+                                menuViewModel.selectedMenuCell.mealCells[mealsViewModel.mealCells[i]] = 10
                             }
                         } label: {
                             ZStack {
@@ -418,15 +418,15 @@ struct AddMealsView: View {
                         if mealsViewModel.selectedMealCells.contains(where: { $0.docId == mealsViewModel.mealCells[i].docId}) {
                             HStack {
                                 Button("-") {
-                                    menuViewModel.selectedMenu.mealCells[mealsViewModel.mealCells[i]]! -= 10
+                                    menuViewModel.selectedMenuCell.mealCells[mealsViewModel.mealCells[i]]! -= 10
                                 }
-                                Button("\(String(describing: menuViewModel.selectedMenu.mealCells[mealsViewModel.mealCells[i]] ?? 0))") {
-                                    countText = "\(String(describing: menuViewModel.selectedMenu.mealCells[mealsViewModel.mealCells[i]]!))"
+                                Button("\(String(describing: menuViewModel.selectedMenuCell.mealCells[mealsViewModel.mealCells[i]] ?? 0))") {
+                                    countText = "\(String(describing: menuViewModel.selectedMenuCell.mealCells[mealsViewModel.mealCells[i]]!))"
                                     selectedMeal = mealsViewModel.mealCells[i]
                                     isEditingCount = true
                                 }
                                 Button("+") {
-                                    menuViewModel.selectedMenu.mealCells[mealsViewModel.mealCells[i]]! += 10
+                                    menuViewModel.selectedMenuCell.mealCells[mealsViewModel.mealCells[i]]! += 10
                                 }
                             }
                             .padding(5)
@@ -454,8 +454,8 @@ struct AddMealsView: View {
             mealsViewModel.selectedSort = .alphabet
             mealsViewModel.selectedOrder = .ascending
             mealsViewModel.menuDocIds.append(contentsOf: habitat.menuCells.map({ $0.docId }))
-            tempMealCells = menuViewModel.selectedMenu.mealCells
-            mealsViewModel.selectedMealCells = Array(menuViewModel.selectedMenu.mealCells.keys)
+            tempMealCells = menuViewModel.selectedMenuCell.mealCells
+            mealsViewModel.selectedMealCells = Array(menuViewModel.selectedMenuCell.mealCells.keys)
             mealsViewModel.mealCells = habitat.mealCells
             mealsViewModel.unsearchedMealCells = habitat.mealCells
             mealsViewModel.sort()
@@ -472,7 +472,7 @@ struct AddMealsView: View {
             let keys = Set(newValue.map({ $0.docId }))
             mealsViewModel.menuDocIds.append(contentsOf: Array(keys))
         })
-        .onChange(of: menuViewModel.selectedMenu.mealCells, { oldValue, newValue in
+        .onChange(of: menuViewModel.selectedMenuCell.mealCells, { oldValue, newValue in
             mealsViewModel.selectedMealCells = Array(newValue.keys)
         })
         .onChange(of: mealsViewModel.isShowingScanner, { oldValue, newValue in
@@ -511,8 +511,8 @@ struct AddMealsView: View {
     }
     private func changeCount() {
         guard let count = Int(countText) else { return }
-        if count != menuViewModel.selectedMenu.mealCells[selectedMeal!] {
-            menuViewModel.selectedMenu.mealCells[selectedMeal!] = count
+        if count != menuViewModel.selectedMenuCell.mealCells[selectedMeal!] {
+            menuViewModel.selectedMenuCell.mealCells[selectedMeal!] = count
         }
         isEditingCount = false
     }

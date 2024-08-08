@@ -20,6 +20,7 @@ struct MenuView: View {
     @State private var isDeletingError = false
     @State private var isShowingMealsDetail = false
     @State private var isAddingMeals = false
+    @State private var isShowingProductionOrderDetail = false
     
     var body: some View {
         NavigationView {
@@ -51,7 +52,7 @@ struct MenuView: View {
                     ForEach(0..<viewModel.menuCells.count, id: \.self) { i in
                         Button {
                             guard let selectedCell = habitat.menuCells.first(where: { $0.docId == viewModel.menuCells[i].docId }) else { return }
-                            viewModel.selectedMenu = selectedCell
+                            viewModel.selectedMenuCell = selectedCell
                             viewModel.isShowingDetail = true
                         } label: {
                             MenuCellView(menuCell: $viewModel.menuCells[i])
@@ -132,54 +133,41 @@ struct MenuView: View {
                 mealsViewModel.mealCells = habitat.mealCells
                 mealsViewModel.unsearchedMealCells = habitat.mealCells
                 mealsViewModel.sort()
+                if let selectedMenu = habitat.menuCells.first(where: { $0.selectedMenu }) {
+                    viewModel.selectedMenu = selectedMenu
+                }
             }
             .onChange(of: viewModel.isShowingDetail, { oldValue, newValue in
                 isShowingDetail = newValue
             })
-//            .onChange(of: mealsViewModel.isShowingDetail, { oldValue, newValue in
-//                if newValue {
-//                    viewModel.isShowingDetail = false
-//                } else {
-//                    viewModel.isShowingDetail = true
-//                }
-//                isShowingMealsDetail = newValue
-//            })
-//            .onChange(of: viewModel.isAddingMeals, { oldValue, newValue in
-//                if newValue {
-//                    viewModel.isShowingDetail = false
-//                } else {
-//                    viewModel.isShowingDetail = true
-//                }
-//                isAddingMeals = newValue
-//            })
+            .onChange(of: viewModel.isShowingProductionOrderDetail, { oldValue, newValue in
+                isShowingProductionOrderDetail = newValue
+            })
             .onChange(of: viewModel.searchText, { oldValue, newValue in
                 if oldValue != newValue {
                     viewModel.search()
                 }
             })
             .popover(isPresented: $isShowingDetail, content: {
-                MenuDetailView(menuCell: $viewModel.selectedMenu)
+                MenuDetailView(menuCell: $viewModel.selectedMenuCell)
                     .environmentObject(viewModel)
                     .environmentObject(mealsViewModel)
                     .environmentObject(habitat)
                     .preferredColorScheme(.light)
             })
-//            .popover(isPresented: $isShowingMealsDetail, content: {
-//                MealDetailView(meal: $mealsViewModel.selectedMeal)
-//                    .environmentObject(mealsViewModel)
-//                    .preferredColorScheme(.light)
-//            })
-//            .popover(isPresented: $isAddingMeals, content: {
-//                AddMealsView()
-//                    .environmentObject(viewModel)
-//                    .environmentObject(mealsViewModel)
-//                    .preferredColorScheme(.light)
-//            })
+            .popover(isPresented: $isShowingProductionOrderDetail, content: {
+                
+            })
             .navigationTitle("Menus")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 HStack {
                     Spacer()
+                    Button {
+                        viewModel.isShowingProductionOrder = true
+                    } label: {
+                        Image(systemName: "eject")
+                    }
                     Button {
                         var count = 1
                         var notFound = false
@@ -191,7 +179,7 @@ struct MenuView: View {
                             }
                         }
                         let newMenu = MenuCell(docId: "New Menu\(count == 1 ? "":" \(count)")", selectedMenu: false, mealCells: [:], mealTypeCount: [:])
-                        viewModel.selectedMenu = newMenu
+                        viewModel.selectedMenuCell = newMenu
                         viewModel.isShowingDetail = true
                     } label: {
                         Image(systemName: "plus.rectangle")

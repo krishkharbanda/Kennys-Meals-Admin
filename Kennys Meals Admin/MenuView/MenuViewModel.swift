@@ -15,7 +15,10 @@ class MenuViewModel: ObservableObject {
     @Published var unsearchedMenuCells = [MenuCell]()
     @Published var isShowingDetail = false
     @Published var selectedMenu = MenuCell()
+    @Published var selectedMenuCell = MenuCell()
     @Published var isAddingMeals = false
+    @Published var isShowingProductionOrderDetail = false
+    @Published var isShowingProductionOrders = false
     
     func search() {
         if searchText == "" {
