@@ -117,6 +117,11 @@ struct MenuView: View {
             .onChange(of: habitat.menuCells, { oldValue, newValue in
                 viewModel.menuCells = newValue
                 viewModel.unsearchedMenuCells = newValue
+                if let selectedMenu = newValue.first(where: { $0.selectedMenu }) {
+                    viewModel.selectedMenu = selectedMenu
+                    viewModel.getProductionOrder()
+                }
+                
             })
             .onChange(of: habitat.mealCells, { oldValue, newValue in
                 mealsViewModel.mealCells = newValue
@@ -135,6 +140,8 @@ struct MenuView: View {
                 mealsViewModel.sort()
                 if let selectedMenu = habitat.menuCells.first(where: { $0.selectedMenu }) {
                     viewModel.selectedMenu = selectedMenu
+                    viewModel.productionOrder = selectedMenu.mealCells
+                    viewModel.getProductionOrder()
                 }
             }
             .onChange(of: viewModel.isShowingDetail, { oldValue, newValue in
@@ -156,17 +163,23 @@ struct MenuView: View {
                     .preferredColorScheme(.light)
             })
             .popover(isPresented: $isShowingProductionOrderDetail, content: {
-                
+                ProductionOrderDetailView(menuCell: $viewModel.selectedMenu)
+                    .environmentObject(viewModel)
+                    .environmentObject(mealsViewModel)
+                    .environmentObject(habitat)
+                    .preferredColorScheme(.light)
             })
             .navigationTitle("Menus")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 HStack {
                     Spacer()
-                    Button {
-                        viewModel.isShowingProductionOrder = true
-                    } label: {
-                        Image(systemName: "eject")
+                    if viewModel.selectedMenu.docId != "docId" {
+                        Button {
+                            viewModel.isShowingProductionOrderDetail = true
+                        } label: {
+                            Image(systemName: "eject")
+                        }
                     }
                     Button {
                         var count = 1

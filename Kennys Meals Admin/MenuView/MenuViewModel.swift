@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseFirestore
 
 class MenuViewModel: ObservableObject {
     @Published var canWrite = false
@@ -19,6 +20,7 @@ class MenuViewModel: ObservableObject {
     @Published var isAddingMeals = false
     @Published var isShowingProductionOrderDetail = false
     @Published var isShowingProductionOrders = false
+    @Published var productionOrder = [MealCell: Int]()
     
     func search() {
         if searchText == "" {
@@ -27,4 +29,27 @@ class MenuViewModel: ObservableObject {
             menuCells = unsearchedMenuCells.filter({$0.docId.lowercased().contains(searchText.lowercased())})
         }
     }
+    func getProductionOrder() {
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        Firestore.firestore().collection("Production Orders").document(tomorrow.convertToDocID).getDocument { documentSnapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+                self.productionOrder = self.selectedMenu.mealCells
+                return
+            }
+            if let document = documentSnapshot {
+                let data = document.data()
+                var menuMeals = [MealCell: Int]()
+                let cellDict = data!["meals"] as! [String: Int]
+                let keys = Array(self.selectedMenu.mealCells.keys)
+                for cell in cellDict {
+                    if let mealCell = keys.first(where: { $0.docId == cell.key }) {
+                        menuMeals[mealCell] = cell.value
+                    }
+                }
+                self.productionOrder = menuMeals
+            }
+        }
+    }
+    
 }

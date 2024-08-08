@@ -13,6 +13,8 @@
 		71267BF02C308957001FE59F /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BEF2C308957001FE59F /* SideMenu.swift */; };
 		71267BF22C308A73001FE59F /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BF12C308A73001FE59F /* SideMenuView.swift */; };
 		71267BF42C308ADF001FE59F /* SideMenuRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71267BF32C308ADF001FE59F /* SideMenuRowType.swift */; };
+		7129B3FD2C654B7A00098481 /* ProductionOrderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129B3FC2C654B7A00098481 /* ProductionOrderDetailView.swift */; };
+		7129B3FF2C65614300098481 /* Date++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129B3FE2C65614300098481 /* Date++Extension.swift */; };
 		713DCE852C5DA036007F934F /* MenuDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DCE842C5DA036007F934F /* MenuDetailView.swift */; };
 		714CCD2F2C420080002BC9A4 /* Image++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CCD2E2C420080002BC9A4 /* Image++Extension.swift */; };
 		7170987A2C2B13A200394F9D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717098792C2B13A200394F9D /* ResetPasswordView.swift */; };
@@ -87,6 +89,8 @@
 		71267BEF2C308957001FE59F /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		71267BF12C308A73001FE59F /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		71267BF32C308ADF001FE59F /* SideMenuRowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuRowType.swift; sourceTree = "<group>"; };
+		7129B3FC2C654B7A00098481 /* ProductionOrderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionOrderDetailView.swift; sourceTree = "<group>"; };
+		7129B3FE2C65614300098481 /* Date++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++Extension.swift"; sourceTree = "<group>"; };
 		713DCE842C5DA036007F934F /* MenuDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailView.swift; sourceTree = "<group>"; };
 		714CCD2E2C420080002BC9A4 /* Image++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image++Extension.swift"; sourceTree = "<group>"; };
 		717098792C2B13A200394F9D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -197,6 +201,19 @@
 			path = SideMenu;
 			sourceTree = "<group>";
 		};
+		7129B4002C6564D100098481 /* MenuView */ = {
+			isa = PBXGroup;
+			children = (
+				71B5730E2C52855F006391A0 /* MenuView.swift */,
+				71B573102C528734006391A0 /* MenuViewModel.swift */,
+				71B573122C5287AB006391A0 /* MenuCell.swift */,
+				71B573142C528DE4006391A0 /* MenuCellView.swift */,
+				713DCE842C5DA036007F934F /* MenuDetailView.swift */,
+				7129B3FC2C654B7A00098481 /* ProductionOrderDetailView.swift */,
+			);
+			path = MenuView;
+			sourceTree = "<group>";
+		};
 		71878D142C1FBB0900FB4A85 = {
 			isa = PBXGroup;
 			children = (
@@ -228,11 +245,7 @@
 				71267BF72C309B31001FE59F /* SideMenu */,
 				71C796BF2C2CA85F00B9624C /* HomeView.swift */,
 				71B5730D2C52853A006391A0 /* MealsView */,
-				71B5730E2C52855F006391A0 /* MenuView.swift */,
-				71B573102C528734006391A0 /* MenuViewModel.swift */,
-				71B573122C5287AB006391A0 /* MenuCell.swift */,
-				71B573142C528DE4006391A0 /* MenuCellView.swift */,
-				713DCE842C5DA036007F934F /* MenuDetailView.swift */,
+				7129B4002C6564D100098481 /* MenuView */,
 				71878D242C1FBB0B00FB4A85 /* Assets.xcassets */,
 				7170987B2C2B2CD400394F9D /* LaunchScreen.storyboard */,
 				71F14C932C4726C000D4F99E /* UIImage++Extension.swift */,
@@ -240,6 +253,7 @@
 				7170987D2C2B336200394F9D /* View++Extension.swift */,
 				714CCD2E2C420080002BC9A4 /* Image++Extension.swift */,
 				71F14C8F2C4244E800D4F99E /* Double++Extension.swift */,
+				7129B3FE2C65614300098481 /* Date++Extension.swift */,
 				71F6930D2C2C9C8700A476A3 /* GoogleService-Info.plist */,
 				71878D262C1FBB0B00FB4A85 /* Preview Content */,
 			);
@@ -455,6 +469,7 @@
 				717A321B2C51C1B20072AC58 /* MealDetailView.swift in Sources */,
 				71B5730F2C52855F006391A0 /* MenuView.swift in Sources */,
 				711945FB2C569216003E9C2D /* ScanViewModel.swift in Sources */,
+				7129B3FD2C654B7A00098481 /* ProductionOrderDetailView.swift in Sources */,
 				7170987A2C2B13A200394F9D /* ResetPasswordView.swift in Sources */,
 				717A32182C51C1B20072AC58 /* MealsView.swift in Sources */,
 				71B573112C528734006391A0 /* MenuViewModel.swift in Sources */,
@@ -462,6 +477,7 @@
 				71C796BC2C2C9E5C00B9624C /* AuthError.swift in Sources */,
 				71C9AB0A2C27609600400D0B /* Habitat.swift in Sources */,
 				71267BF22C308A73001FE59F /* SideMenuView.swift in Sources */,
+				7129B3FF2C65614300098481 /* Date++Extension.swift in Sources */,
 				7170987E2C2B336200394F9D /* View++Extension.swift in Sources */,
 				71878D212C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift in Sources */,
 				71F14C942C4726C000D4F99E /* UIImage++Extension.swift in Sources */,

@@ -24,6 +24,8 @@ struct ProductionOrderDetailView: View {
     @State private var isScanError = false
     @State private var deletingCell: MealCell?
     @State private var isDeleting = false
+    @State private var tomorrowString = String()
+    @State private var expirationString = String()
     
     var body: some View {
         ZStack {
@@ -37,8 +39,14 @@ struct ProductionOrderDetailView: View {
         }
         .onAppear {
             tempMenu = menuCell
-            mealCells = Array(menuCell.mealCells.keys)
+            mealCells = Array(viewModel.productionOrder.keys)
             mealsViewModel.viewingMealFromMenu = true
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            var formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            tomorrowString = formatter.string(from: tomorrow)
+            let expiration = Calendar.current.date(byAdding: .day, value: 8, to: tomorrow)!
+            expirationString = formatter.string(from: expiration)
         }
         .onDisappear {
             if isEditing {
@@ -51,19 +59,14 @@ struct ProductionOrderDetailView: View {
                 for mealCell in mealCells {
                     mealsDict[mealCell.docId] = menuCell.mealCells[mealCell]
                 }
-                var tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
                 Firestore.firestore().collection("Production Orders").document(tomorrow.convertToDocID).setData(["meals": mealsDict, "menu": menuCell.docId])
             }
-            viewModel.isShowingDetail = false
+            viewModel.isShowingProductionOrderDetail = false
         }
         .onChange(of: menuCell.mealCells) { oldValue, newValue in
-            mealCells = Array(menuCell.mealCells.keys)
+            mealCells = Array(viewModel.productionOrder.keys)
         }
-        .onChange(of: mealsViewModel.selectedSku, { oldValue, newValue in
-            if newValue != 0 {
-                selectSku()
-            }
-        })
         .alert("Change \(selectedMeal?.docId ?? "")", isPresented: $isEditingCount) {
             TextField("count", text: $countText)
             Button("Ok", action: changeCount)
@@ -84,10 +87,10 @@ struct ProductionOrderDetailView: View {
                             for mealCell in mealCells {
                                 mealsDict[mealCell.docId] = menuCell.mealCells[mealCell]
                             }
-                            var tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
                             Firestore.firestore().collection("Production Orders").document(tomorrow.convertToDocID).setData(["meals": mealsDict, "menu": menuCell.docId])
                         }
-                        viewModel.isShowingDetail = false
+                        viewModel.isShowingProductionOrderDetail = false
                     } label: {
                         Image(systemName: "xmark")
                     }
@@ -100,7 +103,7 @@ struct ProductionOrderDetailView: View {
                                 if !mealCells.isEmpty {
                                     var mealsDict = [String: Int]()
                                     for mealCell in mealCells {
-                                        mealsDict[mealCell.docId] = menuCell.mealCells[mealCell]
+                                        mealsDict[mealCell.docId] = viewModel.productionOrder[mealCell]
                                     }
                                     Firestore.firestore().collection("Menus").document(menuCell.docId).setData(["meals": mealsDict, "selectedMenu": menuCell.selectedMenu], merge: false)
                                 }
@@ -119,83 +122,87 @@ struct ProductionOrderDetailView: View {
                             }
                         }
                     }
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "tray.full")
-                    }
                 }
                 .padding(.vertical)
-                TextField("title", text: $menuCell.docId, axis: .vertical)
+                Text("Production Order")
                     .font(.title)
                     .bold()
                     .multilineTextAlignment(.center)
-                    .disabled(!isEditing)
-                    .lineLimit(3)
+                Text("\(menuCell.docId) - \(tomorrowString)")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
+                Text("Expires \(expirationString)")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.center)
+
             }
             .padding()
             ScrollView {
                 ForEach(0..<mealCells.count, id: \.self) { i in
-                    VStack {
-                        Button {
-                            mealsViewModel.getSelectedMeal(mealCell: mealCells[i])
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerSize: CGSize(width: 20, height: 10))
-                                    .foregroundStyle(.white)
-                                    .shadow(radius: 5)
-                                MealCellView(mealCell: $mealCells[i])
-                            }
-                            .padding(.top, 3)
-                        }
-                        .contextMenu {
+                    if isEditing || viewModel.productionOrder[mealCells[i]] ?? 0 != 0 {
+                        VStack {
                             Button {
-                                deletingCell = mealCells[i]
-                                isDeleting = true
+                                mealsViewModel.getSelectedMeal(mealCell: mealCells[i])
                             } label: {
-                                HStack {
-                                    Image(systemName: "trash")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                    Text("Delete")
+                                ZStack {
+                                    RoundedRectangle(cornerSize: CGSize(width: 20, height: 10))
+                                        .foregroundStyle(.white)
+                                        .shadow(radius: 5)
+                                    MealCellView(mealCell: $mealCells[i])
                                 }
+                                .padding(.top, 3)
                             }
+                            HStack {
+                                Spacer()
+                                Button {
+                                    viewModel.productionOrder[mealCells[i]]! = 0
+                                } label: {
+                                    Text("None")
+                                        .font(.title3)
+                                        .foregroundStyle((!isEditing || viewModel.productionOrder[mealCells[i]] ?? 0 == 0) ? Color.gray.opacity(0.6):Color.orange)
+                                        .padding()
+                                }
+                                .disabled(!isEditing || viewModel.productionOrder[mealCells[i]] ?? 0 == 0)
+                                Button {
+                                    if viewModel.productionOrder[mealCells[i]]! < 10 {
+                                        viewModel.productionOrder[mealCells[i]]! = 0
+                                    } else {
+                                        viewModel.productionOrder[mealCells[i]]! -= 10
+                                    }
+                                } label: {
+                                    Text("-")
+                                        .foregroundStyle(.white)
+                                        .padding()
+                                        .background(((!isEditing || viewModel.productionOrder[mealCells[i]] ?? 0 <= 0) ? Color.gray:Color.orange).opacity(0.6))
+                                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
+                                }
+                                .disabled(!isEditing || viewModel.productionOrder[mealCells[i]] ?? 0 <= 0)
+                                Button {
+                                    countText = "\(String(describing: viewModel.productionOrder[mealCells[i]] ?? 0))"
+                                    selectedMeal = mealCells[i]
+                                    isEditingCount = true
+                                } label: {
+                                    Text("\(String(describing: viewModel.productionOrder[mealCells[i]] ?? 0))")
+                                        .font(.title3)
+                                }
+                                .disabled(!isEditing)
+                                Button {
+                                    viewModel.productionOrder[mealCells[i]]! += 10
+                                } label: {
+                                    Text("+")
+                                        .foregroundStyle(.white)
+                                        .padding()
+                                        .background((!isEditing ? Color.gray:Color.orange).opacity(0.6))
+                                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
+                                }
+                                .disabled(!isEditing)
+                            }
+                            .padding(.horizontal)
                         }
-                        HStack {
-                            Spacer()
-                            Button {
-                                menuCell.mealCells[mealCells[i]]! -= 10
-                            } label: {
-                                Text("-")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .background(.gray.opacity(0.6))
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
-                            }
-                            .disabled(!isEditing || menuCell.mealCells[mealCells[i]] ?? 0 <= 10)
-                            Button {
-                                countText = "\(String(describing: menuCell.mealCells[mealCells[i]] ?? 0))"
-                                selectedMeal = mealCells[i]
-                                isEditingCount = true
-                            } label: {
-                                Text("\(String(describing: menuCell.mealCells[mealCells[i]] ?? 0))")
-                                    .font(.title3)
-                            }
-                            .disabled(!isEditing)
-                            Button {
-                                menuCell.mealCells[mealCells[i]]! += 10
-                            } label: {
-                                Text("+")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .background(.gray.opacity(0.6))
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
-                            }
-                            .disabled(!isEditing)
-                        }
-                        .padding(.horizontal)
+                        .padding(.top, 3)
                     }
-                    .padding(.top, 3)
                 }
             }
             Spacer()
@@ -204,25 +211,9 @@ struct ProductionOrderDetailView: View {
     
     private func changeCount() {
         guard let count = Int(countText) else { return }
-        if count != menuCell.mealCells[selectedMeal!] {
-            menuCell.mealCells[selectedMeal!] = count
+        if count != viewModel.productionOrder[selectedMeal!] {
+            viewModel.productionOrder[selectedMeal!] = count
         }
         isEditingCount = false
-    }
-    
-    func selectSku() {
-        if let mealCell = mealsViewModel.mealCells.first(where: { $0.sku == mealsViewModel.selectedSku }) {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-            mealsViewModel.selectedSku = 0
-            mealsViewModel.searchText = mealCell.docId
-            mealsViewModel.search()
-            mealsViewModel.isShowingScanner = false
-        } else {
-            UINotificationFeedbackGenerator().notificationOccurred(.error)
-            scanErrorText = "Barcode not found in database."
-            mealsViewModel.isShowingScanner = false
-            mealsViewModel.isShowingScanner = true
-            isScanError = true
-        }
     }
 }

@@ -209,7 +209,7 @@ struct MenuDetailView: View {
                                 Text("-")
                                     .foregroundStyle(.white)
                                     .padding()
-                                    .background(.gray.opacity(0.6))
+                                    .background(((!isEditing || menuCell.mealCells[mealCells[i]] ?? 0 <= 10) ? Color.gray:Color.orange).opacity(0.6))
                                     .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
                             }
                             .disabled(!isEditing || menuCell.mealCells[mealCells[i]] ?? 0 <= 10)
@@ -228,7 +228,7 @@ struct MenuDetailView: View {
                                 Text("+")
                                     .foregroundStyle(.white)
                                     .padding()
-                                    .background(.gray.opacity(0.6))
+                                    .background((!isEditing ? Color.gray:Color.orange).opacity(0.6))
                                     .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
                             }
                             .disabled(!isEditing)
