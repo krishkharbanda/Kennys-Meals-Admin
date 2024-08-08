@@ -203,18 +203,33 @@ struct MenuDetailView: View {
                         }
                         HStack {
                             Spacer()
-                            Button("-") {
+                            Button {
                                 menuCell.mealCells[mealCells[i]]! -= 10
+                            } label: {
+                                Text("-")
+                                    .foregroundStyle(.white)
+                                    .padding()
+                                    .background(.gray.opacity(0.6))
+                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
                             }
-                            .disabled(!isEditing)
-                            Button("\(String(describing: menuCell.mealCells[mealCells[i]] ?? 0))") {
+                            .disabled(!isEditing || menuCell.mealCells[mealCells[i]] ?? 0 <= 10)
+                            Button {
                                 countText = "\(String(describing: menuCell.mealCells[mealCells[i]] ?? 0))"
                                 selectedMeal = mealCells[i]
                                 isEditingCount = true
+                            } label: {
+                                Text("\(String(describing: menuCell.mealCells[mealCells[i]] ?? 0))")
+                                    .font(.title3)
                             }
                             .disabled(!isEditing)
-                            Button("+") {
+                            Button {
                                 menuCell.mealCells[mealCells[i]]! += 10
+                            } label: {
+                                Text("+")
+                                    .foregroundStyle(.white)
+                                    .padding()
+                                    .background(.gray.opacity(0.6))
+                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular))
                             }
                             .disabled(!isEditing)
                         }
