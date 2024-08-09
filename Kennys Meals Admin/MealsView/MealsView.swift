@@ -176,6 +176,7 @@ struct MealsView: View {
             .popover(isPresented: $isShowingDetail, content: {
                 MealDetailView(meal: $viewModel.selectedMeal)
                     .environmentObject(viewModel)
+                    .environmentObject(habitat)
                     .preferredColorScheme(.light)
             })
             .navigationTitle("Meals")

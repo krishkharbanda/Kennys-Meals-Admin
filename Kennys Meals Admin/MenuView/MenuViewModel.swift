@@ -38,9 +38,9 @@ class MenuViewModel: ObservableObject {
                 return
             }
             if let document = documentSnapshot {
-                let data = document.data()
+                guard let data = document.data() else { return }
                 var menuMeals = [MealCell: Int]()
-                let cellDict = data!["meals"] as! [String: Int]
+                let cellDict = data["meals"] as! [String: Int]
                 let keys = Array(self.selectedMenu.mealCells.keys)
                 for cell in cellDict {
                     if let mealCell = keys.first(where: { $0.docId == cell.key }) {

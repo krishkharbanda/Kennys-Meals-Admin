@@ -16,6 +16,7 @@ struct MealDetailView: View {
     //["title": meal.title, "subtitle": meal.subtitle, "portion": meal.portion, "sku": meal.sku, "barcodeConversion": meal.barcodeConversion, "mealInstructions": meal.mealInstructions, "instructions": meal.instructions, "ingredients": meal.ingredients, "contains": meal.contains, "imageTag": meal.mealType.rawValue, "servingSize": meal.nutritionFacts.servingSize, "calories": meal.nutritionFacts.calories, "totalFat": meal.nutritionFacts.totalFat, "totalFatPercentage": meal.nutritionFacts.totalFatPercentage, "saturatedFat": meal.nutritionFacts.satFat, "saturatedFatPercentage": meal.nutritionFacts.satFatPercentage, "transFat": meal.nutritionFacts.transFat, "transFatPercentage": meal.nutritionFacts.transFatPercentage, "cholestrol": meal.nutritionFacts.cholesterol, "cholestrolPercentage": meal.nutritionFacts.cholesterolPercentage, "sodium": meal.nutritionFacts.sodium, "sodiumPercentage": meal.nutritionFacts.sodiumPercentage, "potassium": meal.nutritionFacts.potassium, "potassiumPercentage": meal.nutritionFacts.potassiumPercentage, "carbohydrate": meal.nutritionFacts.totalCarb, "carbohydratePercentage": meal.nutritionFacts.totalCarbPercentage, "fiber": meal.nutritionFacts.fiber, "fiberPercentage": meal.nutritionFacts.fiberPercentage, "sugars": meal.nutritionFacts.totalSugar, "addedSugars": meal.nutritionFacts.addedSugars, "protein": meal.nutritionFacts.protein, "proteinPercentage": meal.nutritionFacts.proteinPercentage, "calcium": meal.nutritionFacts.calcium, "calciumPercentage": meal.nutritionFacts.calciumPercentage, "vitaminD": meal.nutritionFacts.vitD, "vitaminDPercentage": meal.nutritionFacts.vitDPercentage, "iron": meal.nutritionFacts.iron, "ironPercentage": meal.nutritionFacts.ironPercentage]
     
     @EnvironmentObject var viewModel: MealsViewModel
+    @EnvironmentObject var habitat: Habitat
     @Binding var meal: Meal
     @State private var image: UIImage?
     @State private var isEditing = false
@@ -29,6 +30,9 @@ struct MealDetailView: View {
     @State private var fat = String()
     @State private var carbs = String()
     @State private var protein = String()
+    @State private var isAddingToMenu = false
+    @State private var menuIndex = 0
+    @State private var countText = "10"
     
     var body: some View {
         VStack {
@@ -41,6 +45,19 @@ struct MealDetailView: View {
                     }
                     Spacer()
                     if viewModel.canWrite {
+                        Menu {
+                            ForEach(1..<viewModel.menuDocIds.count, id: \.self) { i in
+                                Button {
+                                    menuIndex = i
+                                    isAddingToMenu = true
+                                } label: {
+                                    Text(viewModel.menuDocIds[i])
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "rectangle.badge.plus")
+                        }
+                        .padding(.trailing)
                         Button {
                             if !isEditing {
                                 tempMeal = meal
@@ -374,17 +391,44 @@ struct MealDetailView: View {
                     }
                 }
                 .padding()
-                Text("Instructions")
-                    .fontWeight(.medium)
-                ForEach(meal.instructions, id: \.self) { instruction in
-                    Text("\(meal.instructions.first! == instruction ? "1":"2"). " + instruction)
+                if meal.instructions.count > 0 {
+                    Text("Instructions")
+                        .fontWeight(.medium)
+                    ForEach(meal.instructions, id: \.self) { instruction in
+                        Text("\(meal.instructions.first! == instruction ? "1":"2"). " + instruction)
+                    }
+                    .padding(.horizontal)
                 }
-                //.padding(.horizontal)
             }
         }
         .onTapGesture {
             self.hideKeyboard()
         }
+        .alert("Add to \(viewModel.menuDocIds[menuIndex])", isPresented: $isAddingToMenu, actions: {
+            TextField("count", text: $countText)
+            Button("Cancel", role: .cancel) {isAddingToMenu = false}
+            Button("Set") {
+                let mealsDict = habitat.menuCells[menuIndex-1].mealCells
+                var mealsStringDict = [String : Int]()
+                var exists = false
+                let keys = Array(mealsDict.keys)
+                guard let count = Int(self.countText) else { return }
+                for mealCell in keys {
+                    mealsStringDict[mealCell.docId] = mealsDict[mealCell]
+                    if mealCell.docId == self.meal.docId {
+                        mealsStringDict[mealCell.docId]! += count
+                        exists = true
+                    }
+                }
+                if !exists {
+                    mealsStringDict[self.meal.docId] = count
+                }
+                Firestore.firestore().collection("Menus").document(viewModel.menuDocIds[menuIndex]).setData(["meals": mealsStringDict, "selectedMenu": self.habitat.menuCells[menuIndex-1].selectedMenu], merge: false)
+            }
+            .disabled(countText.isEmpty)
+        }, message: {
+            Text("Set the count of \(meal.title) \(meal.subtitle).")
+        })
         .alert("Error Selecting Photo", isPresented: $isPhotoError, actions: {
             Button{isPhotoError = false} label: { Text("Ok") }
         }, message: {
