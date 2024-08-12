@@ -21,6 +21,7 @@ class MenuViewModel: ObservableObject {
     @Published var isShowingProductionOrderDetail = false
     @Published var isShowingProductionOrders = false
     @Published var productionOrder = [MealCell: Int]()
+    @Published var ingredients = [Ingredient: Int]()
     
     func search() {
         if searchText == "" {
@@ -48,8 +49,36 @@ class MenuViewModel: ObservableObject {
                     }
                 }
                 self.productionOrder = menuMeals
+                self.totalIngredients()
             }
         }
     }
-    
+    func totalIngredients() {
+        var ingredients = [Ingredient: Int]()
+        var keys = Array(productionOrder.keys)
+        DispatchQueue.main.async {
+            for mealCell in keys {
+                if self.productionOrder[mealCell]! > 0 {
+                    Firestore.firestore().collection("Meals").document(mealCell.docId).getDocument { documentSnapshot, error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            return
+                        }
+                        if let document = documentSnapshot {
+                            guard let portions = document.get("portion") as? [String: String] else { return }
+                            let portionKeys = Array(portions.keys)
+                            for portion in portionKeys {
+                                if ingredients[Ingredient(name: portion)] == nil {
+                                    ingredients[Ingredient(name: portion)] = self.productionOrder[mealCell]!
+                                } else {
+                                    ingredients[Ingredient(name: portion)]! += self.productionOrder[mealCell]!
+                                }
+                            }
+                            self.ingredients = ingredients
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

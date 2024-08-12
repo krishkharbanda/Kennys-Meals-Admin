@@ -140,7 +140,6 @@ struct MenuView: View {
                 mealsViewModel.sort()
                 if let selectedMenu = habitat.menuCells.first(where: { $0.selectedMenu }) {
                     viewModel.selectedMenu = selectedMenu
-                    viewModel.productionOrder = selectedMenu.mealCells
                     viewModel.getProductionOrder()
                 }
             }
