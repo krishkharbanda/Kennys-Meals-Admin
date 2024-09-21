@@ -15,7 +15,10 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
+                Image("kennyslogo-big")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding()
             }
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)

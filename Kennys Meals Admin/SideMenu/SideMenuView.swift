@@ -13,6 +13,7 @@ struct SideMenuView: View {
     var name: String
     @Binding var selectedSideMenuTab: Int
     @Binding var presentSideMenu: Bool
+    @Binding var appScene: AppScene
     
     var body: some View {
         HStack {
@@ -39,7 +40,9 @@ struct SideMenuView: View {
                             try Auth.auth().signOut()
                         } catch let signOutError as NSError {
                             print("Error signing out: %@", signOutError)
-                          }
+                        }
+                        appScene = .login
+                        presentSideMenu = false
                     } label: {
                         Text("Log Out")
                             .bold()

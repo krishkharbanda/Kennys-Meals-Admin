@@ -37,6 +37,7 @@
 		71878D322C1FBB0C00FB4A85 /* Kennys_Meals_AdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D312C1FBB0C00FB4A85 /* Kennys_Meals_AdminTests.swift */; };
 		71878D3C2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D3B2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift */; };
 		71878D3E2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71878D3D2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift */; };
+		719E48422C8A1EF2008424E1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E48412C8A1EF2008424E1 /* ActivityViewController.swift */; };
 		71B5730F2C52855F006391A0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5730E2C52855F006391A0 /* MenuView.swift */; };
 		71B573112C528734006391A0 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B573102C528734006391A0 /* MenuViewModel.swift */; };
 		71B573132C5287AB006391A0 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B573122C5287AB006391A0 /* MenuCell.swift */; };
@@ -111,6 +112,8 @@
 		71878D372C1FBB0C00FB4A85 /* Kennys Meals AdminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kennys Meals AdminUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71878D3B2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kennys_Meals_AdminUITests.swift; sourceTree = "<group>"; };
 		71878D3D2C1FBB0C00FB4A85 /* Kennys_Meals_AdminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kennys_Meals_AdminUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		719E48412C8A1EF2008424E1 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		71A55C572C7E5F38003381A1 /* Kennys Meals Admin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Kennys Meals Admin.entitlements"; sourceTree = "<group>"; };
 		71B5730E2C52855F006391A0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		71B573102C528734006391A0 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		71B573122C5287AB006391A0 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 		71878D1F2C1FBB0900FB4A85 /* Kennys Meals Admin */ = {
 			isa = PBXGroup;
 			children = (
+				71A55C572C7E5F38003381A1 /* Kennys Meals Admin.entitlements */,
 				71C796C62C2F5FA700B9624C /* Kennys-Meals-Admin-Info.plist */,
 				71878D202C1FBB0900FB4A85 /* Kennys_Meals_AdminApp.swift */,
 				71C9AB0D2C27628000400D0B /* AppScene.swift */,
@@ -248,6 +252,7 @@
 				7129B4002C6564D100098481 /* MenuView */,
 				71878D242C1FBB0B00FB4A85 /* Assets.xcassets */,
 				7170987B2C2B2CD400394F9D /* LaunchScreen.storyboard */,
+				719E48412C8A1EF2008424E1 /* ActivityViewController.swift */,
 				71F14C932C4726C000D4F99E /* UIImage++Extension.swift */,
 				71F14C952C4858E600D4F99E /* Int++Extension.swift */,
 				7170987D2C2B336200394F9D /* View++Extension.swift */,
@@ -484,6 +489,7 @@
 				71C796C02C2CA85F00B9624C /* HomeView.swift in Sources */,
 				71F6930C2C2C9B4C00A476A3 /* LoginViewModel.swift in Sources */,
 				71F14C962C4858E600D4F99E /* Int++Extension.swift in Sources */,
+				719E48422C8A1EF2008424E1 /* ActivityViewController.swift in Sources */,
 				717A32172C51C1B20072AC58 /* MealCellView.swift in Sources */,
 				71B573152C528DE4006391A0 /* MenuCellView.swift in Sources */,
 				71C796BE2C2C9FF900B9624C /* User.swift in Sources */,
@@ -648,8 +654,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Kennys Meals Admin/Kennys Meals Admin.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kennys Meals Admin/Preview Content\"";
 				DEVELOPMENT_TEAM = SV7TAGBDW5;
 				ENABLE_PREVIEWS = YES;
@@ -681,8 +688,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Kennys Meals Admin/Kennys Meals Admin.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kennys Meals Admin/Preview Content\"";
 				DEVELOPMENT_TEAM = SV7TAGBDW5;
 				ENABLE_PREVIEWS = YES;

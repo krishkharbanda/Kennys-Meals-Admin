@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-struct Meal: Equatable {
+struct Meal: Hashable, Equatable {
     
     static func == (lhs: Meal, rhs: Meal) -> Bool {
         return (lhs.docId == rhs.docId) && (lhs.title == rhs.subtitle) && (lhs.subtitle == rhs.subtitle) && (lhs.mealType == rhs.mealType) && (lhs.nutritionFacts == rhs.nutritionFacts) && (lhs.ingredients == rhs.ingredients) && (lhs.portion == rhs.portion) && (lhs.instructions == rhs.instructions) && (lhs.mealInstructions == rhs.mealInstructions) && (lhs.contains == rhs.contains) && (lhs.sku == rhs.sku) && (lhs.image == rhs.image)
@@ -60,7 +60,7 @@ struct Meal: Equatable {
         self.image = image
     }
 }
-struct NutritionFacts: Equatable {
+struct NutritionFacts: Hashable, Equatable {
     var servingSize: Int
     var calories: Int
     var totalFat: Int
@@ -89,9 +89,117 @@ struct NutritionFacts: Equatable {
     var vitDPercentage: Int
     var iron: Double
     var ironPercentage: Int
+    
+    init() {
+        self.servingSize = 0
+        self.calories = 0
+        self.totalFat = 0
+        self.totalFatPercentage = 0
+        self.satFat = 0
+        self.satFatPercentage = 0
+        self.transFat = 0
+        self.transFatPercentage = 0
+        self.cholesterol = 0
+        self.cholesterolPercentage = 0
+        self.sodium = 0
+        self.sodiumPercentage = 0
+        self.potassium = 0
+        self.potassiumPercentage = 0
+        self.totalCarb = 0
+        self.totalCarbPercentage = 0
+        self.fiber = 0
+        self.fiberPercentage = 0
+        self.totalSugar = 0
+        self.addedSugars = 0
+        self.protein = 0
+        self.proteinPercentage = 0
+        self.calcium = 0
+        self.calciumPercentage = 0
+        self.vitD = 0
+        self.vitDPercentage = 0
+        self.iron = 0
+        self.ironPercentage = 0
+    }
+    
+    init(servingSize: Int, calories: Int, totalFat: Int, totalFatPercentage: Int, satFat: Double, satFatPercentage: Int, transFat: Double, transFatPercentage: Int, cholesterol: Int, cholesterolPercentage: Int, sodium: Int, sodiumPercentage: Int, potassium: Int, potassiumPercentage: Int, totalCarb: Int, totalCarbPercentage: Int, fiber: Double, fiberPercentage: Int, totalSugar: Double, addedSugars: Double, protein: Int, proteinPercentage: Int, calcium: Int, calciumPercentage: Int, vitD: Double, vitDPercentage: Int, iron: Double, ironPercentage: Int) {
+        self.servingSize = servingSize
+        self.calories = calories
+        self.totalFat = totalFat
+        self.totalFatPercentage = totalFatPercentage
+        self.satFat = satFat
+        self.satFatPercentage = satFatPercentage
+        self.transFat = transFat
+        self.transFatPercentage = transFatPercentage
+        self.cholesterol = cholesterol
+        self.cholesterolPercentage = cholesterolPercentage
+        self.sodium = sodium
+        self.sodiumPercentage = sodiumPercentage
+        self.potassium = potassium
+        self.potassiumPercentage = potassiumPercentage
+        self.totalCarb = totalCarb
+        self.totalCarbPercentage = totalCarbPercentage
+        self.fiber = fiber
+        self.fiberPercentage = fiberPercentage
+        self.totalSugar = totalSugar
+        self.addedSugars = addedSugars
+        self.protein = protein
+        self.proteinPercentage = proteinPercentage
+        self.calcium = calcium
+        self.calciumPercentage = calciumPercentage
+        self.vitD = vitD
+        self.vitDPercentage = vitDPercentage
+        self.iron = iron
+        self.ironPercentage = ironPercentage
+    }
 }
 struct Ingredient: Hashable, Equatable {
+    
     var name: String
+    var quantity: Double
+    var units: String
+    var ingredients: [String: Double]
+    var preparation: String
+    var category: IngredientCategory
+    
+    init(name: String) {
+        self.name = name
+        self.quantity = 0
+        self.units = "units"
+        self.ingredients = [:]
+        self.preparation = "preparation"
+        self.category = .misc
+    }
+    
+    init(name: String, quantity: Double, units: String, ingredients: [String : Double], preparation: String, category: IngredientCategory) {
+        self.name = name
+        self.quantity = quantity
+        self.units = units
+        self.ingredients = ingredients
+        self.preparation = preparation
+        self.category = category
+    }
+}
+enum IngredientCategory: String, CaseIterable {
+    case proteins = "Proteins"
+    case carbs = "Carbohydrates"
+    case vegetables = "Vegetables"
+    case sauces = "Sauces"
+    case misc = "Miscellaneous"
+    
+    var color: Color {
+        switch self {
+        case .proteins:
+            return .red
+        case .carbs:
+            return .blue
+        case .vegetables:
+            return .green
+        case .sauces:
+            return .purple
+        case .misc:
+            return .gray
+        }
+    }
 }
 enum MealType: String, CaseIterable, Identifiable {
     var id: Self {

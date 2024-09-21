@@ -32,7 +32,7 @@ struct MenuView: View {
                         .foregroundStyle(.gray.opacity(0.5))
                         .frame(maxHeight: 24)
                         .padding(.trailing, 5)
-                    TextField("search meals...", text: $viewModel.searchText)
+                    TextField("search menus...", text: $viewModel.searchText)
                         .font(.callout)
                         .textInputAutocapitalization(.never)
                         .tint(.orange)
@@ -62,7 +62,14 @@ struct MenuView: View {
                                     Group {
                                         if !viewModel.menuCells[i].selectedMenu {
                                             Button {
-                                                guard let selectedIndex = habitat.menuCells.firstIndex(where: { $0.selectedMenu }) else { return }
+                                                guard let selectedIndex = habitat.menuCells.firstIndex(where: { $0.selectedMenu }) else {
+                                                    Firestore.firestore().collection("Menus").document(viewModel.menuCells[i].docId).setData(["selectedMenu": true], merge: true)
+                                                    guard let newIndex = habitat.menuCells.firstIndex(where: { $0.docId == viewModel.menuCells[i].docId }) else { return }
+                                                    habitat.menuCells[newIndex].selectedMenu = true
+                                                    viewModel.selectedMenu = habitat.menuCells[newIndex]
+                                                    viewModel.getProductionOrder()
+                                                    return
+                                                }
                                                 Firestore.firestore().collection("Menus").document(habitat.menuCells[selectedIndex].docId).setData(["selectedMenu": false], merge: true)
                                                 habitat.menuCells[selectedIndex].selectedMenu = false
                                                 Firestore.firestore().collection("Menus").document(viewModel.menuCells[i].docId).setData(["selectedMenu": true], merge: true)
@@ -153,6 +160,9 @@ struct MenuView: View {
                 if oldValue != newValue {
                     viewModel.search()
                 }
+            })
+            .onChange(of: viewModel.productionOrder, { oldValue, newValue in
+                viewModel.totalIngredients()
             })
             .popover(isPresented: $isShowingDetail, content: {
                 MenuDetailView(menuCell: $viewModel.selectedMenuCell)

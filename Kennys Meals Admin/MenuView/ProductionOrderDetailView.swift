@@ -29,7 +29,12 @@ struct ProductionOrderDetailView: View {
     
     var body: some View {
         ZStack {
-            if mealsViewModel.isShowingDetail {
+            if viewModel.isShowingIngredientsView {
+                IngredientsView()
+                    .environmentObject(viewModel)
+                    .environmentObject(mealsViewModel)
+                    .preferredColorScheme(.light)
+            } else if mealsViewModel.isShowingDetail {
                 MealDetailView(meal: $mealsViewModel.selectedMeal)
                     .environmentObject(mealsViewModel)
                     .preferredColorScheme(.light)
@@ -52,6 +57,7 @@ struct ProductionOrderDetailView: View {
             if isEditing {
                 menuCell = tempMenu
             }
+            viewModel.isShowingIngredientsView = false
             mealsViewModel.isShowingDetail = false
             mealsViewModel.viewingMealFromMenu = false
             if !mealCells.isEmpty {
@@ -64,6 +70,9 @@ struct ProductionOrderDetailView: View {
             }
             viewModel.isShowingProductionOrderDetail = false
         }
+        .onChange(of: viewModel.productionOrder, { oldValue, newValue in
+            mealCells = Array(viewModel.productionOrder.keys)
+        })
         .onChange(of: menuCell.mealCells) { oldValue, newValue in
             mealCells = Array(viewModel.productionOrder.keys)
         }
@@ -96,6 +105,11 @@ struct ProductionOrderDetailView: View {
                     }
                     Spacer()
                     if viewModel.canWrite {
+                        Button {
+                            viewModel.isShowingIngredientsView = true
+                        } label: {
+                            Image(systemName: "info.circle")
+                        }
                         Button {
                             if !isEditing {
                                 tempMenu = menuCell
@@ -136,7 +150,7 @@ struct ProductionOrderDetailView: View {
                     .font(.title3)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
-
+                
             }
             .padding()
             ScrollView {
@@ -215,5 +229,278 @@ struct ProductionOrderDetailView: View {
             viewModel.productionOrder[selectedMeal!] = count
         }
         isEditingCount = false
+    }
+}
+
+struct IngredientsView: View {
+    
+    @Environment(\.displayScale) var displayScale
+    @EnvironmentObject var viewModel: MenuViewModel
+    @EnvironmentObject var mealsViewModel: MealsViewModel
+    @State private var ingredients = [IngredientCategory: [Ingredient: [Double]]]()
+    @State private var maxCount = 0
+    @State private var date = String()
+    @State private var exporting = false
+    @State private var isMealExporting = false
+    @State private var isImage = false
+    @State private var activityVC = ActivityViewController(activityItems: [])
+    @State private var mealsImage = UIImage()
+    @State private var meals = [Meal: Int]()
+    @State private var mealsArray = [Meal]()
+    @State private var counts = [String]()
+    @State private var rows = Int()
+    @State private var portionStrings = [String]()
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Button {
+                    viewModel.isShowingIngredientsView = false
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(exporting ? .white:.orange)
+                }
+                Spacer()
+                Button {
+                    isMealExporting.toggle()
+                } label: {
+                    Image(systemName: isMealExporting ? "carrot.fill":"tray.full.fill")
+                        .foregroundStyle(exporting ? .white:.orange)
+                }
+                Button {
+                    shareImage()
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundStyle(exporting ? .white:.orange)
+                }
+            }
+            .padding(.vertical)
+            if isMealExporting {
+                mealsBody
+            } else {
+                ingredientsBody
+            }
+        }
+        .padding()
+        .preferredColorScheme(.light)
+        .onAppear {
+            for category in IngredientCategory.allCases {
+                ingredients[category] = [:]
+            }
+            for ingredient in viewModel.ingredients {
+                ingredients[ingredient.key.category]![ingredient.key] = ingredient.value
+                maxCount = max(maxCount, ingredient.key.ingredients.count)
+            }
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            var formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            date = formatter.string(from: tomorrow)
+            let remainder = (viewModel.mealsProductionOrder.count) % 3
+            rows = viewModel.mealsProductionOrder.count / 3
+            rows += remainder == 0 ? 0:1
+            mealsArray = Array(viewModel.mealsProductionOrder.keys)
+            counts = Array(viewModel.mealsProductionOrder.values).map { String($0) }
+            for meal in mealsArray {
+                var portionString = String()
+                for portion in meal.portion {
+                    portionString += portion.key.name + " " + portion.value
+                    if portion.key != Array(meal.portion.keys).last {
+                        portionString += " / "
+                    }
+                }
+                portionStrings.append(portionString)
+            }
+        }
+        .sheet(isPresented: $isImage) {
+            print("Dismiss")
+        } content: {
+            activityVC
+        }
+        .onChange(of: viewModel.mealsProductionOrder) { oldValue, newValue in
+            mealsArray = Array(newValue.keys)
+            counts = Array(newValue.values).map { String($0) }
+            portionStrings = []
+            for meal in mealsArray {
+                var portionString = String()
+                for portion in meal.portion {
+                    portionString += portion.key.name + " " + portion.value
+                    if portion.key != Array(meal.portion.keys).last {
+                        portionString += " / "
+                    }
+                }
+                portionStrings.append(portionString)
+            }
+        }
+        
+    }
+    
+    var ingredientsBody: some View {
+        VStack {
+            Text("Ingredients of \(date)")
+                .font(.title)
+                .bold()
+                .foregroundStyle(.black)
+            ScrollView {
+                ScrollView(.horizontal) {
+                    ForEach(IngredientCategory.allCases, id: \.self) { category in
+                        if !(ingredients[category] ?? [:]).isEmpty {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text(category.rawValue)
+                                        .font(.title2)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(.black)
+                                    Spacer()
+                                }
+                                ForEach(Array(ingredients[category]!.keys), id: \.self) { ingredient in
+                                    VStack {
+                                        HStack(spacing: 30) {
+                                            VStack {
+                                                ZStack {
+                                                    RoundedRectangle(cornerSize: CGSize(width: 20, height: 10))
+                                                        .fill(category.color)
+                                                        .opacity(0.4)
+                                                    Text(ingredient.name)
+                                                        .fontWeight(.medium)
+                                                        .padding(.vertical, 5)
+                                                        .foregroundStyle(.black)
+                                                }
+                                                .frame(width: 200)
+                                                Text("\(ingredients[category]![ingredient]![0].forTrailingZero()) Meal\(ingredients[category]![ingredient]![0] == 1 ? "":"s") • \((ingredients[category]![ingredient]![0] * ingredient.quantity).forTrailingZero())\(ingredients[category]![ingredient]![1] == 0 ? "":" + \(ingredients[category]![ingredient]![1]) = \(ingredients[category]![ingredient]![0] + ingredients[category]![ingredient]![1]) \(ingredient.units)")")
+                                                    .foregroundStyle(.black)
+                                            }
+                                            LazyHStack {
+                                                ForEach(Array(ingredient.ingredients.keys), id: \.self) { ingred in
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .fill(.clear)
+                                                        VStack {
+                                                            Text(ingred)
+                                                                .fontWeight(.medium)
+                                                                .foregroundStyle(.black)
+                                                            Text(String(Double(round(10 * ingredient.ingredients[ingred]! * (ingredients[category]![ingredient]![0] + ingredients[category]![ingredient]![1]/ingredient.quantity)) / 10)))
+                                                                .foregroundStyle(.black)
+                                                        }
+                                                    }
+                                                    .frame(width: 200)
+                                                }
+                                                ForEach(Array(ingredient.ingredients.keys).count..<maxCount, id: \.self) { ingred in
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .fill(.clear)
+                                                            .frame(width: 200)
+                                                    }
+                                                }
+                                            }
+                                            ZStack {
+                                                Rectangle()
+                                                    .fill(.clear)
+                                                VStack {
+                                                    Text(ingredient.preparation)
+                                                        .font(.system(size: 12))
+                                                        .multilineTextAlignment(.center)
+                                                        .foregroundStyle(.black)
+                                                        .lineLimit(2)
+                                                }
+                                            }
+                                            .frame(width: 300)
+                                        }
+                                        Rectangle()
+                                            .foregroundStyle(.black)
+                                            .frame(height: 1)
+                                    }
+                                }
+                            }
+                            .padding()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    var mealsBody: some View {
+        ZStack {
+            Color.white
+            VStack {
+                Text("Meals of \(date)")
+                    .font(.title)
+                    .bold()
+                    .foregroundStyle(.black)
+                ScrollView {
+                    ScrollView(.horizontal) {
+                        ForEach(0..<rows, id: \.self) { i in
+                            LazyHStack {
+                                ForEach(i*3..<(i+1)*3, id: \.self) { j in
+                                    ZStack {
+                                        if j >= mealsArray.count {
+                                            Rectangle()
+                                                .foregroundStyle(.white)
+                                        }
+                                        else {
+                                            RoundedRectangle(cornerSize: CGSize(width: 20, height: 10))
+                                                .foregroundStyle(.white)
+                                                .shadow(radius: j < mealsArray.count ? 5: 0)
+                                            HStack {
+                                                VStack {
+                                                    if let image = mealsArray[j].image {
+                                                        Image(uiImage: image)
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(height: 150)
+                                                    } else {
+                                                        Image("emptyBox")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(height: 150)
+                                                    }
+                                                    Text(counts[j])
+                                                        .font(.title)
+                                                        .bold()
+                                                }
+                                                VStack {
+                                                    Text(mealsArray[j].title)
+                                                        .font(.title2)
+                                                        .fontWeight(.semibold)
+                                                        .multilineTextAlignment(.center)
+                                                        .padding(.horizontal, 5)
+                                                        .padding(.top, 5)
+                                                    Text(mealsArray[j].subtitle)
+                                                        .font(.title3)
+                                                        .multilineTextAlignment(.center)
+                                                        .padding(.horizontal, 5)
+                                                    Text(portionStrings[j])
+                                                        .multilineTextAlignment(.center)
+                                                        .padding(5)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .frame(width: 500, height: 300)
+                                    .padding()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .preferredColorScheme(.light)
+    }
+    
+    
+    
+    
+    private func shareImage() {
+        exporting = true
+        guard var screenshotImage1 = body.snapshot() else { return }
+        isMealExporting.toggle()
+        guard var screenshotImage2 = body.snapshot() else { return }
+        activityVC = ActivityViewController(activityItems: [screenshotImage1, screenshotImage2])
+        isMealExporting.toggle()
+        exporting = false
+        isImage = true
     }
 }

@@ -107,4 +107,31 @@ class MealsViewModel: ObservableObject {
             }
         }
     }
+    func getMeal(mealCell: MealCell) -> Meal {
+        var meal = Meal()
+        DispatchQueue.main.async {
+            Firestore.firestore().collection("Meals").document(mealCell.docId).getDocument { documentSnapshot, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                if let documentSnapshot = documentSnapshot {
+                    var instructions: [String]?
+                    if let instructionArray = documentSnapshot.get("instructions") {
+                        if let nsinstructions = instructionArray as? NSArray, let instructionsArray = nsinstructions as? [String] {
+                            instructions = instructionsArray
+                        }
+                    }
+                    let nutritionFacts = NutritionFacts(servingSize: documentSnapshot.get("servingSize") as! Int, calories: mealCell.cals, totalFat: mealCell.fat, totalFatPercentage: documentSnapshot.get("totalFatPercentage") as! Int, satFat: documentSnapshot.get("saturatedFat") as! Double, satFatPercentage: documentSnapshot.get("saturatedFatPercentage") as! Int, transFat: documentSnapshot.get("transFat") as! Double, transFatPercentage: documentSnapshot.get("transFatPercentage") as! Int, cholesterol: documentSnapshot.get("cholestrol") as! Int, cholesterolPercentage: documentSnapshot.get("cholestrolPercentage") as! Int, sodium: documentSnapshot.get("sodium") as! Int, sodiumPercentage: documentSnapshot.get("sodiumPercentage") as! Int, potassium: documentSnapshot.get("potassium") as! Int, potassiumPercentage: documentSnapshot.get("potassiumPercentage") as! Int, totalCarb: mealCell.carbs, totalCarbPercentage: documentSnapshot.get("carbohydratePercentage") as! Int, fiber: documentSnapshot.get("fiber") as! Double, fiberPercentage: documentSnapshot.get("fiberPercentage") as! Int, totalSugar: documentSnapshot.get("sugars") as! Double, addedSugars: documentSnapshot.get("addedSugars") as! Double, protein: mealCell.protein, proteinPercentage: documentSnapshot.get("proteinPercentage") as! Int, calcium: documentSnapshot.get("calcium") as! Int, calciumPercentage: documentSnapshot.get("calciumPercentage") as! Int, vitD: documentSnapshot.get("vitaminD") as! Double, vitDPercentage: documentSnapshot.get("vitaminDPercentage") as! Int, iron: documentSnapshot.get("iron") as! Double, ironPercentage: documentSnapshot.get("ironPercentage") as! Int)
+                    var portion = [Ingredient: String]()
+                    let portionDict = documentSnapshot.get("portion") as! [String: String]
+                    for portionPair in portionDict {
+                        portion[Ingredient(name: portionPair.key)] = portionPair.value
+                    }
+                    meal = Meal(docId: mealCell.docId, title: mealCell.title, subtitle: mealCell.subtitle, mealType: mealCell.mealType, nutritionFacts: nutritionFacts, ingredients: documentSnapshot.get("ingredients") as! String, portion: portion, instructions: instructions ?? [], mealInstructions: documentSnapshot.get("mealInstructions") as! String, contains: documentSnapshot.get("contains") as! String, barcodeConversion: documentSnapshot.get("barcodeConversion") as! String, sku: mealCell.sku, image: mealCell.mealImage)
+                }
+            }
+        }
+        return meal
+    }
 }

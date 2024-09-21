@@ -41,7 +41,7 @@ struct HabitatView: View {
                             .preferredColorScheme(.light)
                             .tag(SideMenuRowType.menus.rawValue)
                     }
-                    SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(name: habitat.user.name, selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
+                    SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(name: habitat.user.name, selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu, appScene: $habitat.appScene)))
                 }
             }
         }

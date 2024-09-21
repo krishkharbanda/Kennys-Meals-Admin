@@ -118,3 +118,40 @@ struct Kennys_Meals_AdminApp: App {
     }
 }
 
+//    .task {
+//        let itemArray = tempStr.split(separator: "\n")
+//        for item in itemArray {
+//            var subItemArray = item.split(separator: "  ")
+//            print(subItemArray)
+//            let docId = subItemArray[0]
+//            let quantityArray = subItemArray[1].split(separator: " ")
+//            var preparation = subItemArray.last!
+//            if preparation == "." {
+//                preparation = ""
+//            }
+//            subItemArray.removeLast()
+//            subItemArray.removeFirst(2)
+//            print(subItemArray)
+//            var ingredients = [String: Double]()
+//            for item in subItemArray {
+//                var keyVal = item.split(separator: ": ")
+//                if item != subItemArray.last! {
+//                    keyVal[1].removeLast()
+//                }
+//                ingredients[String(keyVal[0])] = Double(keyVal[1])
+//            }
+//            print(ingredients)
+//            guard let quantity = Double(quantityArray[0]) else { fatalError(String(docId)) }
+//            Firestore.firestore().collection("Ingredients").document(String(docId)).setData(["quantity": quantity, "units": String(quantityArray[1]), "ingredients": ingredients, "preparation": String(preparation)])
+//        }
+//    }
+
+//var portion = data["portion"] as! [String: String]
+//let keys = Array(portion.keys)
+//let old = "Sour Cream"
+//if keys.contains(where: { $0 == old}) {
+//    print(old, doc.documentID)
+//    portion[""] = portion[old]
+//    portion.removeValue(forKey: old)
+//    Firestore.firestore().collection("Meals").document(doc.documentID).updateData(["portion": portion])
+//}
